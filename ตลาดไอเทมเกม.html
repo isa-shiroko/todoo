@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ตลาดไอเทมเกม</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;700&family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--surface:#12151F;--ink:#EEF2FF;--mute:#9AA6C4;--line:#2A3248;--accent:#7C9BFF;--on:#0A1020;--r0:#97A2B8;--r1:#4CC38A;--r2:#B58AF2;--r3:#F0A53A;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--surface:#12151F;--ink:#E9EEFA;--mute:#9BA8C7;--line:#34406103;--line:#344061;--accent:#7C9BFF;--on:#101830;--r0:#97A2B8;--r1:#4CC38A;--r2:#B58AF2;--r3:#F0A53A;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#000;--surface:#12151F;--ink:#E9EEFA;--mute:#9BA8C7;--line:#344061;--accent:#7C9BFF;--on:#101830;--r0:#97A2B8;--r1:#4CC38A;--r2:#B58AF2;--r3:#F0A53A;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 Sarabun,"Noto Sans Thai",sans-serif}
+h1,h2,.num,button,.tab{font-family:Kanit,Sarabun,sans-serif}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:2px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--surface);z-index:10}
+.bar{max-width:1040px;margin:auto;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+h1{font-size:1.35rem;margin:0;flex:1;font-weight:700;letter-spacing:.01em}
+.wallet{background:var(--bg);border:2px solid var(--line);border-radius:999px;padding:4px 14px;font-family:Kanit;font-weight:700}
+.wallet small{font-weight:500;color:var(--mute);margin-left:4px}
+nav{max-width:1040px;margin:auto;padding:0 16px;display:flex;gap:4px;overflow-x:auto}
+.tab{background:none;border:0;border-bottom:4px solid transparent;padding:8px 14px;font-size:1rem;color:var(--mute);cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--ink);border-color:var(--accent)}
+main{max-width:1040px;margin:auto;padding:20px 16px 64px}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+input,select{font:inherit;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:12px;padding:8px 12px;min-width:0}
+input[type=search]{flex:1;min-width:160px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.chip{border-radius:999px;border:2px solid var(--line);background:var(--surface);color:var(--ink);padding:3px 12px;font-size:.9rem;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.card{background:var(--surface);border:2px solid var(--line);border-radius:20px;padding:14px;display:flex;gap:12px;flex-wrap:wrap}
+.slot{width:68px;height:68px;flex:none;display:grid;place-items:center;font-size:2.1rem;border-radius:18px;border:4px solid var(--c);background:color-mix(in srgb,var(--c) 14%,var(--surface));box-shadow:inset 0 0 0 2px var(--surface)}
+.r0{--c:var(--r0)}.r1{--c:var(--r1)}.r2{--c:var(--r2)}.r3{--c:var(--r3)}
+.info{flex:1;min-width:110px}
+.name{font-family:Kanit;font-weight:700;line-height:1.3;word-break:break-word}
+.rar{font-size:.85rem;font-weight:600;color:var(--c)}
+.meta{font-size:.85rem;color:var(--mute)}
+.foot{width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:2px dashed var(--line);padding-top:10px}
+.price{font-family:Kanit;font-weight:700;font-size:1.1rem}
+button.btn{border-radius:999px;background:var(--accent);color:var(--on);border:0;padding:6px 14px;font-size:.95rem;cursor:pointer}
+button.btn.alt{background:none;color:var(--ink);border:2px solid var(--line)}
+button.btn:disabled{opacity:.45;cursor:not-allowed}
+.sell{display:flex;gap:6px;width:100%;flex-wrap:wrap}
+.sell input{width:90px}
+form.f{display:grid;gap:12px;max-width:460px;background:var(--surface);border:2px solid var(--line);border-radius:20px;padding:16px;margin-bottom:24px}
+form.f label{display:grid;gap:4px;font-weight:600}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+h2{font-size:1.1rem;margin:20px 0 10px}
+.empty{border-radius:20px;padding:32px 12px;color:var(--mute);border:2px dashed var(--line);text-align:center}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);border-radius:999px;padding:10px 20px;opacity:0;pointer-events:none;transition:opacity .2s;max-width:90vw;z-index:20}
+#toast.on{opacity:1}
+@media (prefers-reduced-motion:reduce){#toast{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="bar"><h1>ตลาดไอเทมเกม</h1><div class="wallet" aria-live="polite">🪙 <span id="coins" class="num">0</span><small>เหรียญ</small></div></div>
+  <nav role="tablist" id="tabs">
+    <button class="tab" role="tab" data-v="market">ตลาด</button>
+    <button class="tab" role="tab" data-v="inv">คลังของฉัน</button>
+    <button class="tab" role="tab" data-v="sell">ลงขาย</button>
+  </nav>
+</header>
+<main id="app"></main>
+<div id="toast" role="status"></div>
+<script>
+const RAR=['ธรรมดา','หายาก','มหากาพย์','ตำนาน'];
+const CATS=['ทั้งหมด','อาวุธ','เกราะ','ยา','วัสดุ','สกิน'];
+const EMO=['⚔️','🛡️','🧪','💎','👑','🏹','🪄','🥾','📜','🐉','🔮','🪓'];
+const seed=()=>({coins:5000,nid:100,view:'market',
+ market:[
+  {id:1,n:'ดาบเหล็กกล้า',e:'⚔️',c:'อาวุธ',r:1,p:850,s:'นักรบเหนือ'},
+  {id:2,n:'โล่มังกรเพลิง',e:'🛡️',c:'เกราะ',r:3,p:4200,s:'DragonSlayer'},
+  {id:3,n:'ยาฟื้นพลังใหญ่',e:'🧪',c:'ยา',r:0,p:60,s:'หมอยาน้อย'},
+  {id:4,n:'ผลึกมานา',e:'💎',c:'วัสดุ',r:2,p:1500,s:'ช่างตีเหมือง'},
+  {id:5,n:'มงกุฎราชันย์ลวง',e:'👑',c:'สกิน',r:3,p:3600,s:'นางพญา99'},
+  {id:6,n:'ธนูลมกระซิบ',e:'🏹',c:'อาวุธ',r:2,p:1900,s:'เอลฟ์ป่าลึก'},
+  {id:7,n:'คทาแสงจันทร์',e:'🪄',c:'อาวุธ',r:1,p:980,s:'พ่อมดเดินทาง'},
+  {id:8,n:'รองเท้าผ้าใบนักเดินทาง',e:'🥾',c:'เกราะ',r:0,p:120,s:'คนเดินป่า'},
+  {id:9,n:'ม้วนคัมภีร์โบราณ',e:'📜',c:'วัสดุ',r:1,p:400,s:'บรรณารักษ์'},
+  {id:10,n:'ลูกแก้วพยากรณ์',e:'🔮',c:'สกิน',r:2,p:2200,s:'แม่หมอใจดี'}],
+ inv:[{id:50,n:'ขวานฝึกหัด',e:'🪓',c:'อาวุธ',r:0,p:90},{id:51,n:'ยาพิษอ่อน',e:'🧪',c:'ยา',r:1,p:300}]});
+let S;
+try{S=JSON.parse(localStorage.getItem('gm-state'))}catch(e){}
+if(!S||!S.market)S=seed();
+let F={q:'',cat:'ทั้งหมด',rar:'all',sort:'new'};
+const $=s=>document.querySelector(s);
+const esc=t=>String(t).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const fmt=n=>n.toLocaleString('th-TH');
+function save(){try{localStorage.setItem('gm-state',JSON.stringify(S))}catch(e){}}
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2200)}
+function card(it,act){return `<article class="card r${it.r}"><div class="slot" aria-hidden="true">${it.e}</div><div class="info"><div class="name">${esc(it.n)}</div><div class="rar">${RAR[it.r]}</div><div class="meta">${it.c}${it.s?' · โดย '+esc(it.s):''}</div></div><div class="foot">${act}</div></article>`}
+function market(){
+  let l=S.market.filter(i=>(F.cat==='ทั้งหมด'||i.c===F.cat)&&(F.rar==='all'||i.r==F.rar)&&i.n.toLowerCase().includes(F.q.toLowerCase()));
+  if(F.sort==='lo')l.sort((a,b)=>a.p-b.p);else if(F.sort==='hi')l.sort((a,b)=>b.p-a.p);else l.sort((a,b)=>b.id-a.id);
+  return `<div class="tools"><input type="search" id="q" placeholder="ค้นหาไอเทม" value="${esc(F.q)}" aria-label="ค้นหาไอเทม">
+  <select id="rar" aria-label="ความหายาก"><option value="all">ทุกความหายาก</option>${RAR.map((r,i)=>`<option value="${i}" ${F.rar==i?'selected':''}>${r}</option>`).join('')}</select>
+  <select id="sort" aria-label="เรียงลำดับ"><option value="new" ${F.sort=='new'?'selected':''}>ใหม่สุด</option><option value="lo" ${F.sort=='lo'?'selected':''}>ราคาต่ำ → สูง</option><option value="hi" ${F.sort=='hi'?'selected':''}>ราคาสูง → ต่ำ</option></select></div>
+  <div class="chips">${CATS.map(c=>`<button class="chip" data-cat="${c}" aria-pressed="${F.cat===c}">${c}</button>`).join('')}</div>
+  <div class="grid" id="list">${l.length?l.map(i=>card(i,`<span class="price">🪙 ${fmt(i.p)}</span>`+(i.mine?`<button class="btn alt" data-cancel="${i.id}">ยกเลิกขาย</button>`:`<button class="btn" data-buy="${i.id}" ${S.coins<i.p?'disabled':''}>${S.coins<i.p?'เหรียญไม่พอ':'ซื้อเลย'}</button>`)).replace('<article','<article')).join(''):'<div class="empty" style="grid-column:1/-1">ไม่พบไอเทมที่ตรงกับตัวกรอง ลองล้างคำค้นหาหรือเลือกหมวดอื่น</div>'}</div>`}
+function inv(){
+  return `<h2>ไอเทมในคลัง (${S.inv.length})</h2><div class="grid">${S.inv.length?S.inv.map(i=>card(i,`<div class="sell"><input type="number" min="1" value="${i.p}" id="p${i.id}" aria-label="ราคาขาย ${esc(i.n)}"><button class="btn" data-list="${i.id}">ลงขาย</button><button class="btn alt" data-quick="${i.id}" title="รับ 60% ของราคาอ้างอิง">ขายด่วน 🪙${fmt(Math.floor(i.p*.6))}</button></div>`)).join(''):'<div class="empty" style="grid-column:1/-1">คลังยังว่างอยู่ ไปเลือกซื้อไอเทมที่ตลาดได้เลย</div>'}</div>`}
+function sell(){
+  const mine=S.market.filter(i=>i.mine);
+  return `<h2>สร้างรายการขายใหม่</h2><form class="f" id="sf"><label>ชื่อไอเทม<input name="n" required maxlength="30" placeholder="เช่น ดาบแสงอาทิตย์"></label>
+  <div class="row2"><label>หมวด<select name="c">${CATS.slice(1).map(c=>`<option>${c}</option>`).join('')}</select></label><label>ความหายาก<select name="r">${RAR.map((r,i)=>`<option value="${i}">${r}</option>`).join('')}</select></label></div>
+  <div class="row2"><label>ไอคอน<select name="e">${EMO.map(e=>`<option>${e}</option>`).join('')}</select></label><label>ราคา (เหรียญ)<input name="p" type="number" min="1" required value="100"></label></div>
+  <button class="btn" type="submit">ลงขายในตลาด</button></form>
+  <h2>รายการที่คุณลงขาย (${mine.length})</h2><div class="grid">${mine.length?mine.map(i=>card(i,`<span class="price">🪙 ${fmt(i.p)}</span><button class="btn alt" data-cancel="${i.id}">ยกเลิกขาย</button>`)).join(''):'<div class="empty" style="grid-column:1/-1">ยังไม่มีรายการ กรอกฟอร์มด้านบนเพื่อลงขายชิ้นแรก</div>'}</div>`}
+function render(){
+  $('#coins').textContent=fmt(S.coins);
+  document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.v===S.view));
+  $('#app').innerHTML=({market,inv,sell})[S.view]();
+  save();
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.v){S.view=b.dataset.v;render();return}
+  if(b.dataset.cat){F.cat=b.dataset.cat;render();return}
+  const id=+(b.dataset.buy||b.dataset.cancel||b.dataset.list||b.dataset.quick);
+  if(b.dataset.buy){const i=S.market.find(x=>x.id===id);if(!i||S.coins<i.p)return;S.coins-=i.p;S.market=S.market.filter(x=>x.id!==id);S.inv.push({id:S.nid++,n:i.n,e:i.e,c:i.c,r:i.r,p:i.p});toast('ซื้อ '+i.n+' แล้ว อยู่ในคลังของคุณ');render()}
+  else if(b.dataset.cancel){const i=S.market.find(x=>x.id===id);S.market=S.market.filter(x=>x.id!==id);S.inv.push({id:S.nid++,n:i.n,e:i.e,c:i.c,r:i.r,p:i.p});toast('ยกเลิกการขายแล้ว ไอเทมกลับไปที่คลัง');render()}
+  else if(b.dataset.list){const i=S.inv.find(x=>x.id===id);const p=Math.floor(+$('#p'+id).value);if(!(p>0)){toast('กรอกราคาที่มากกว่า 0');return}S.inv=S.inv.filter(x=>x.id!==id);S.market.push({...i,id:S.nid++,p,s:'คุณ',mine:true});toast('ลงขาย '+i.n+' แล้ว');render()}
+  else if(b.dataset.quick){const i=S.inv.find(x=>x.id===id);const g=Math.floor(i.p*.6);S.coins+=g;S.inv=S.inv.filter(x=>x.id!==id);toast('ขาย '+i.n+' ได้ '+fmt(g)+' เหรียญ');render()}
+});
+document.addEventListener('input',e=>{
+  if(e.target.id==='q'){F.q=e.target.value;const pos=e.target.selectionStart;render();const q=$('#q');q.focus();q.setSelectionRange(pos,pos)}
+});
+document.addEventListener('change',e=>{
+  if(e.target.id==='rar'){F.rar=e.target.value;render()}
+  if(e.target.id==='sort'){F.sort=e.target.value;render()}
+});
+document.addEventListener('submit',e=>{
+  if(e.target.id!=='sf')return;e.preventDefault();
+  const d=new FormData(e.target),p=Math.floor(+d.get('p'));
+  if(!(p>0)){toast('กรอกราคาที่มากกว่า 0');return}
+  S.market.push({id:S.nid++,n:d.get('n').trim(),e:d.get('e'),c:d.get('c'),r:+d.get('r'),p,s:'คุณ',mine:true});
+  toast('ลงขายเรียบร้อย');render();
+});
+render();
+</script>
+</body>
+</html>
